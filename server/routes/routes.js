@@ -1,11 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const AuthenticationController = require('../controllers/authenticationController');
+const AuthenticationControllerPolicy = require('../policies/AuthenticationControllerPolicy');
 
-router.post('/register', (req, res) => {
-    res.send({
-        message: `Hello ${req.body.email}, Your Registration was successful.`
-    })
-})
+router.post('/register', AuthenticationControllerPolicy.register, AuthenticationController.register);
 
 
 // Export API routes

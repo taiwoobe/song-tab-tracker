@@ -13,7 +13,9 @@
                         <br>
                         <div class="spinner-holder">
                             <button class="" type="submit">Register</button>
+                            <p v-if="error"> {{ error }}</p>
                         </div>
+
                      </form>
                 </div>
             </div>
@@ -28,16 +30,24 @@ import AuthenticationService from '../services/authenticationService'
         data() {
             return {
                 email: '',
-                password: ''
+                password: '',
+                error: ''
             }
         },
         methods: {
             async registerUser() {
-                const response = await AuthenticationService.register({
-                    email: this.email,
-                    password: this.password
-                })
-                console.log(response.data);
+                try {
+                    const response = await AuthenticationService.register({
+                        email: this.email,
+                        password: this.password
+                    })
+                    console.log(response.data);
+                    this.email = '';
+                    this.password = '';
+                    this.error = '';
+                } catch (error) {
+                    this.error = error.response.data.error;
+                }
             }
         },
     }

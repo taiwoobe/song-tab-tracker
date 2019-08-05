@@ -4,7 +4,7 @@ const cors = require('cors')
 const morgan = require('morgan')
 const dbConfig = require('./config/config');
 const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
+// mongoose.Promise = global.Promise;
 
 const app = express();
 
@@ -13,7 +13,7 @@ app.use(cors());
 app.use(morgan('combined'));
 
 // Connect to Mongoose and set connection variable
-mongoose.connect(dbConfig.url, { useNewUrlParser: true}).then(() => {
+mongoose.connect(dbConfig.url, { useNewUrlParser: true, useCreateIndex: true}).then(() => {
     console.log("Successfully connected to the database"); 
 }).catch(err => {
     console.log('Could not connect to the database. Exiting now...', err);
