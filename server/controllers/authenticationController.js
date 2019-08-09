@@ -1,13 +1,30 @@
 User = require('../models/userModel');
+const jwt = require('jsonwebtoken');
+const config = require('../config/jwt');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
+
+// Helper function to set JWT Token
+function jwtSignUser(user) {
+    return jwt.sign(user, config.secret, {
+        expiresIn: 86400 // expires in 24 hours
+    })
+}
 
 module.exports = {
     async register (req, res) {
         try {
-            const user = await User.create(req.body);
+            const hashedPassword = bcrypt.hashSync(req.body.password, saltRounds);
+            const user = await User.create({
+                email: req.body.email,
+                password: hashedPassword
+            });
             res.json({
                 status: "success",
                 message: 'User created sucessfully.',
-                data: user
+                data: user,
+                token: jwtSignUser(user.toJSON())
             });
         } catch(err) {
             res.status(400).send({
@@ -19,8 +36,8 @@ module.exports = {
         try {
             const { email, password } = req.body;
             const user = await User.findOne({ email: email });
-            const isPasswordValid = password === user.password;
-            if (!user || !isPasswordValid){
+            const passwordIsValid = bcrypt.compareSync(password, user.password);
+            if (!user || !passwordIsValid){
                 return res.status(403).send({
                     error: 'The Login information was incorrect.'
                 })
@@ -28,7 +45,9 @@ module.exports = {
             res.json({
                 status: "success",
                 message: 'User login sucessfully.',
-                data: user
+                auth: true,
+                data: user,
+                token: jwtSignUser(user.toJSON())
             });
         } catch(err) {
             res.status(500).send({

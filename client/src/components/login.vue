@@ -43,7 +43,6 @@ import AuthenticationService from '../services/authenticationService'
                         email: this.email,
                         password: this.password
                     })
-                    console.log(response.data);
                     this.email = '';
                     this.password = '';
                     this.error = '';

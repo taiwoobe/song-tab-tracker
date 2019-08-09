@@ -9,7 +9,7 @@
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
-                <v-form @submit.prevent="registerUser">
+                <v-form @submit.prevent="registerUser" autocomplete="off">
                   <v-text-field label="Email Address" name="register" prepend-icon="email" type="email" v-model="email"></v-text-field>
                   <v-text-field id="password" label="Password" name="password" prepend-icon="lock" type="password" v-model="password"></v-text-field>
                 </v-form>
@@ -43,7 +43,6 @@ import AuthenticationService from '../services/authenticationService'
                         email: this.email,
                         password: this.password
                     })
-                    console.log(response.data);
                     this.email = '';
                     this.password = '';
                     this.error = '';
@@ -66,6 +65,6 @@ import AuthenticationService from '../services/authenticationService'
 
 // MEDIA QUERIES //
 @media (max-width: 767px) {
-  
+
 }
 </style>
