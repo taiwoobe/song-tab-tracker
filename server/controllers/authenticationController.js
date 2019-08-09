@@ -14,6 +14,27 @@ module.exports = {
                 error: 'The email you entered already exists.'
             })
         }
+    },
+    async login (req, res) {
+        try {
+            const { email, password } = req.body;
+            const user = await User.findOne({ email: email });
+            const isPasswordValid = password === user.password;
+            if (!user || !isPasswordValid){
+                return res.status(403).send({
+                    error: 'The Login information was incorrect.'
+                })
+            }
+            res.json({
+                status: "success",
+                message: 'User login sucessfully.',
+                data: user
+            });
+        } catch(err) {
+            res.status(500).send({
+                error: 'Something went wrong trying to log you in. Try again.'
+            })
+        }
     }
 }
 

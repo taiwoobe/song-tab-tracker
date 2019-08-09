@@ -26,7 +26,7 @@
 </template>
 
 <script>
-// import AuthenticationService from '../services/authenticationService'
+import AuthenticationService from '../services/authenticationService'
     export default {
         name: 'login',
         data() {
@@ -37,6 +37,20 @@
             }
         },
         methods: {
+            async loginUser() {
+                 try {
+                    const response = await AuthenticationService.login({
+                        email: this.email,
+                        password: this.password
+                    })
+                    console.log(response.data);
+                    this.email = '';
+                    this.password = '';
+                    this.error = '';
+                } catch (error) {
+                    this.error = error.response.data.error;
+                }
+            }
         },
     }
 </script>

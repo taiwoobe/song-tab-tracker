@@ -4,6 +4,7 @@ const AuthenticationController = require('../controllers/authenticationControlle
 const AuthenticationControllerPolicy = require('../policies/AuthenticationControllerPolicy');
 
 router.post('/register', AuthenticationControllerPolicy.register, AuthenticationController.register);
+router.post('/login', AuthenticationController.login);
 
 
 // Export API routes
