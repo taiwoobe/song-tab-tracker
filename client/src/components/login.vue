@@ -5,18 +5,18 @@
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12">
               <v-toolbar color="primary" dark flat>
-                <v-toolbar-title>Registration form</v-toolbar-title>
+                <v-toolbar-title>Login form</v-toolbar-title>
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
-                <v-form @submit.prevent="registerUser">
+                <v-form @submit.prevent="loginUser">
                   <v-text-field label="Email Address" name="register" prepend-icon="email" type="email" v-model="email"></v-text-field>
                   <v-text-field id="password" label="Password" name="password" prepend-icon="lock" type="password" v-model="password"></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" type="submit" @click="registerUser"> Register</v-btn>
+                <v-btn color="primary" type="submit" @click="loginUser"> Login</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -26,9 +26,9 @@
 </template>
 
 <script>
-import AuthenticationService from '../services/authenticationService'
+// import AuthenticationService from '../services/authenticationService'
     export default {
-        name: 'register',
+        name: 'login',
         data() {
             return {
                 email: '',
@@ -37,20 +37,6 @@ import AuthenticationService from '../services/authenticationService'
             }
         },
         methods: {
-            async registerUser() {
-                try {
-                    const response = await AuthenticationService.register({
-                        email: this.email,
-                        password: this.password
-                    })
-                    console.log(response.data);
-                    this.email = '';
-                    this.password = '';
-                    this.error = '';
-                } catch (error) {
-                    this.error = error.response.data.error;
-                }
-            }
         },
     }
 </script>
