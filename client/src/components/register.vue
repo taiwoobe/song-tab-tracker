@@ -1,13 +1,10 @@
 <template>
+  <div>
     <v-content>
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4>
-            <v-card class="elevation-12">
-              <v-toolbar color="primary" dark flat>
-                <v-toolbar-title>Registration form</v-toolbar-title>
-                <v-spacer></v-spacer>
-              </v-toolbar>
+            <shared-panel title="Registration form">
               <v-card-text>
                 <v-form @submit.prevent="registerUser" autocomplete="off">
                   <v-text-field label="Email Address" name="register" prepend-icon="email" type="email" v-model="email"></v-text-field>
@@ -18,17 +15,22 @@
                 <v-spacer></v-spacer>
                 <v-btn color="primary" type="submit" @click="registerUser"> Register</v-btn>
               </v-card-actions>
-            </v-card>
+            </shared-panel>
           </v-flex>
         </v-layout>
       </v-container>
     </v-content>
+  </div>
 </template>
 
 <script>
 import AuthenticationService from '../services/authenticationService'
+import sharedPanel from './shared/sharedPanel';
     export default {
         name: 'register',
+        components: {
+          sharedPanel
+        },
         data() {
             return {
                 email: '',
