@@ -5,7 +5,9 @@ import vuetify from '@/plugins/vuetify'
 import { store } from './store/store'
 import VeeValidate from 'vee-validate';
 
-Vue.use(VeeValidate);
+Vue.use(VeeValidate, {
+  events: ''
+});
 
 Vue.config.productionTip = false
 

@@ -7,24 +7,26 @@
                         <shared-panel title="Song Metadata">
                             <v-card-text>
                                 <v-text-field label="Title" v-validate="'required'" name="title" v-model="song.title"></v-text-field>
-                                <span>{{ errors.first('title') }}</span>
-                                <v-text-field label="Artist" v-validate="'required'" v-model="song.artist"></v-text-field>
-                                <v-text-field label="Genre" v-validate="'required'" v-model="song.genre"></v-text-field>
-                                <v-text-field label="Cover Art URL" v-validate="'required'" v-model="song.coverArt"></v-text-field>
-                                <v-text-field label="YouTube ID" v-validate="'required'" v-model="song.youtubeId"></v-text-field>
+                                <v-text-field label="Artist" v-validate="'required'" name="artist" v-model="song.artist"></v-text-field>
+                                <v-text-field label="Genre" v-validate="'required'" name="genre" v-model="song.genre"></v-text-field>
+                                <v-text-field label="Cover Art URL" v-validate="'required'" name="coverArt" v-model="song.coverArt"></v-text-field>
+                                <v-text-field label="YouTube ID" v-validate="'required'" name="youtubeId" v-model="song.youtubeId"></v-text-field>
                             </v-card-text>
                         </shared-panel>
                     </v-flex>
                     <v-flex xs12 sm6 md6>
                         <shared-panel title="Song Content">
                             <v-card-text>
-                                <v-textarea label="Lyrics" v-validate="'required'" v-model="song.lyrics"></v-textarea>
-                                <v-textarea label="Tab" v-validate="'required'" v-model="song.tab"></v-textarea>
+                                <v-textarea label="Lyrics" v-validate="'required'" name="lyrics" v-model="song.lyrics"></v-textarea>
+                                <v-textarea label="Tab" v-validate="'required'" name="tab" v-model="song.tab"></v-textarea>
+                                <v-card-actions>
+                                    <v-btn color="primary" type="submit" @click="createSong">Create Song</v-btn>
+                                    <v-spacer></v-spacer>
+                                    <div v-if="error">
+                                        {{ error }}
+                                    </div>
+                                </v-card-actions>
                             </v-card-text>
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn color="primary" type="submit" @click="createSong">Create Song</v-btn>
-                            </v-card-actions>
                         </shared-panel>
                     </v-flex>
                 </v-layout>
@@ -51,20 +53,27 @@ import songService from '../../services/songsService'
                     coverArt: '',
                     youtubeId: '',
                     lyrics: '',
-                    tab: ''       
-                }
+                    tab: ''
+                },
+                error: ''      
             }
         },
         methods: {
-            async createSong() {
-                try {
-                    const response = await songService.createNewSong(this.song);
-                    this.song = {};
-                } catch (error) {
+            createSong() {
+                this.error = '';
+                this.$validator.validate().then(response => {
+                    if (response) {
+                        songService.createNewSong(this.song);
+                        this.song = {};
+                    } else {
+                        this.error = 'Please fill in all fields.'
+                    }
+                }).catch(error => {
+                    this.error = 'Something went wrong. Please try again.';
                     console.log(error);
-                }
+                });
             }
-        },
+        }
     }
 </script>
 
