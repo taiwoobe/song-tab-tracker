@@ -7,13 +7,16 @@
             <v-btn class="primary" dark text> Browse </v-btn>
         </v-toolbar-items>
         <v-spacer></v-spacer>
-        <v-toolbar-items>
+        <v-toolbar-items v-if="!$store.state.isUserLoggedIn">
             <v-btn class="primary" dark text @click="navigateToLogin"> 
                 Login
             </v-btn>
             <v-btn class="primary" dark text @click="navigateToRegister"> 
                 Sign Up
             </v-btn>
+        </v-toolbar-items>
+        <v-toolbar-items v-else>
+            <v-btn class="primary" dark text> Logout </v-btn>
         </v-toolbar-items>
     </v-toolbar>
 

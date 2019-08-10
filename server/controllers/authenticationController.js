@@ -23,7 +23,7 @@ module.exports = {
             res.json({
                 status: "success",
                 message: 'User created sucessfully.',
-                data: user,
+                user: user,
                 token: jwtSignUser(user.toJSON())
             });
         } catch(err) {
@@ -46,7 +46,7 @@ module.exports = {
                 status: "success",
                 message: 'User login sucessfully.',
                 auth: true,
-                data: user,
+                user: user,
                 token: jwtSignUser(user.toJSON())
             });
         } catch(err) {
