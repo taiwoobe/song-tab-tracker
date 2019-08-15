@@ -28,7 +28,7 @@
     import songMetadata from '../songsComponent/songMetadata'
     import lyricsMetadata from '../songsComponent/lyricsMetadata'
     import youtubeMetadata from '../songsComponent/youtubeMetadata'
-    import songServices from '../../services/songsService'
+    import songService from '../../services/songsService'
     export default {   
         components: {
             sharedPanel,
@@ -44,7 +44,7 @@
         },
         async mounted() {
             this.song_id = this.$route.params.id;
-            const response = await songServices.showSong(this.song_id);
+            const response = await songService.showSong(this.song_id);
             this.song = response.data.data;
         },
     }

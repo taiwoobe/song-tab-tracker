@@ -22,7 +22,7 @@
                             <v-card-text>
                                 <v-textarea label="Lyrics" v-validate="'required'" name="lyrics" v-model="song.lyrics" rows="25"></v-textarea>
                                 <v-card-actions>
-                                    <v-btn color="primary" type="submit" @click="createSong">Create Song</v-btn>
+                                    <v-btn color="primary" type="submit" @click="saveSong">Save Song</v-btn>
                                     <v-spacer></v-spacer>
                                     <div v-if="error">
                                         {{ error }}
@@ -41,7 +41,7 @@
 import sharedPanel from '../shared/sharedPanel'
 import songService from '../../services/songsService'
     export default {
-        name: 'createSong',
+        name: 'editSong',
         components: {
             sharedPanel
         },
@@ -61,13 +61,19 @@ import songService from '../../services/songsService'
                 error: ''      
             }
         },
+        async mounted() {
+            const song_id = this.$route.params.id;
+            const response = await songService.showSong(song_id);
+            this.song = response.data.data;
+        }, 
         methods: {
-            createSong() {
+            saveSong() {
                 this.error = '';
                 this.$validator.validate().then(response => {
                     if (response) {
-                        songService.createNewSong(this.song);
+                        songService.updateSong(this.song);
                         this.song = {};
+                        this.$router.push({name: 'viewSong'});
                     } else {
                         this.error = 'Please fill in all fields.'
                     }

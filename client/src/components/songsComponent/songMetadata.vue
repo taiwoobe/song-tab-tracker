@@ -2,12 +2,15 @@
     <shared-panel title="Song Metadata">
         <v-card class="card-body">
             <v-img height="200px" :src="song.coverArt"></v-img>
+             <v-btn light medium absolute right middle fab @click="editSong(song)">
+                <v-icon>edit</v-icon>
+            </v-btn>
             <v-card-title class="align-end fill-height">
-                {{song.title}} - {{ song.artist.name }}
+                {{song.title}} - {{ song.artist }}
             </v-card-title>
-            <v-card-text><strong>Name of Artist: </strong> {{ song.artist.name }}</v-card-text>
-            <v-card-text><strong>Country: </strong> {{ song.artist.countryOfOrigin }}</v-card-text>
-            <v-card-text><strong>Artist Rating: </strong> {{ song.artist.rating }}</v-card-text>
+            <v-card-text><strong>Name of Artist: </strong> {{ song.artist }}</v-card-text>
+            <v-card-text><strong>Country: </strong> {{ song.countryOfOrigin }}</v-card-text>
+            <v-card-text><strong>Artist Rating: </strong> {{ song.rating }}</v-card-text>
             <v-card-text><strong>Genre: </strong> {{ song.genre }}</v-card-text>
             <v-card-text class="v-card__text2"><strong>Album: </strong> {{ song.album }}</v-card-text>
             <v-card-text class="v-card__text2"><strong>Youtube ID: </strong> {{ song.youtubeId }}</v-card-text>
@@ -23,7 +26,12 @@ import sharedPanel from '../shared/sharedPanel'
         },
         props: [
             'song'
-        ]
+        ],
+        methods: {
+            editSong() {
+                this.$router.push({name: 'editSong'});
+            }
+        },
     }
 </script>
 
@@ -41,6 +49,9 @@ import sharedPanel from '../shared/sharedPanel'
     }
     strong {
         width: 45%;
+    }
+    button {
+        margin-top: 15px;
     }
 
     // MEDIA QUERIES

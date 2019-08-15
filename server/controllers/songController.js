@@ -31,21 +31,7 @@ module.exports = {
     },
     async createSong(req, res) {
         try {
-            const { title, name, country, rating, genre, album, coverArt, youtubeId, lyrics, tab } = req.body;
-            const song = await Song.create({
-                title: title,
-                artist: {
-                    name: name,
-                    countryOfOrigin: country,
-                    rating: rating
-                },
-                genre: genre,
-                album: album,
-                coverArt: coverArt,
-                youtubeId: youtubeId,
-                lyrics: lyrics,
-                tab: tab
-            });
+            const song = await Song.create(req.body);
             res.json({
                 status: "success",
                 message: 'Songs created sucessfully.',
@@ -54,6 +40,20 @@ module.exports = {
         } catch (err) {
             res.status(500).send({
                 error: 'Something went wrong while creating the song. PLease try again.'
+            })
+        }
+    },
+    async updateSong(req, res) {
+        try {
+            const song = await Song.findByIdAndUpdate(req.params.id, req.body, {new: true});
+            res.json({
+                status: "success",
+                message: 'Song updated sucessfully.',
+                data: song
+            })
+        } catch (err) {
+            res.status(500).send({
+                error: 'Something went wrong while updating the song. PLease try again.'
             })
         }
     }

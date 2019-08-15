@@ -3,17 +3,14 @@ const mongoose = require('mongoose');
 // Setup schema
 const songsSchema = new mongoose.Schema({
     title: String,
-    artist: {
-        name: String,
-        countryOfOrigin: String,
-        rating: Number
-    },
+    artist: String,
+    countryOfOrigin: String,
+    rating: Number,
     genre: String,
     album: String,
     coverArt: String,
     youtubeId: String,
-    lyrics: String,
-    tab: String
+    lyrics: String
 }, {
     timestamps: true
 });
