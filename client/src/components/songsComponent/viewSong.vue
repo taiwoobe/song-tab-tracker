@@ -1,20 +1,45 @@
 <template>
-    <div>
-        <div v-if="song">
-            <h2>The song id is {{ song_id }}</h2>
-            Song title: {{ song.title }}
-        </div>
+    <div v-if="song">
+         <v-content>
+            <v-container fluid fill-height>
+                <v-layout align-center justify-center>
+                    <v-flex xs12 sm12 md12>
+                        <v-row class="songs">
+                            <v-col sm="12" md="6">
+                                <song-metadata :song="song"></song-metadata>
+                            </v-col>
+                            <v-col sm="12" md="6">
+                                <lyrics-metadata :lyrics="song.lyrics"></lyrics-metadata>
+                            </v-col>
+                            <v-col sm="12" md="6">
+                                <youtube-metadata :youtubeId="song.youtubeId"></youtube-metadata>
+                            </v-col>
+                        </v-row>
+                    </v-flex>
+                </v-layout>
+            </v-container>
+        </v-content>
     </div>
 </template>
 
 <script>
-    // name: 'viewSong'
+    name: 'viewSong'
+    import sharedPanel from '../shared/sharedPanel'
+    import songMetadata from '../songsComponent/songMetadata'
+    import lyricsMetadata from '../songsComponent/lyricsMetadata'
+    import youtubeMetadata from '../songsComponent/youtubeMetadata'
     import songServices from '../../services/songsService'
-    export default {    
+    export default {   
+        components: {
+            sharedPanel,
+            songMetadata,
+            lyricsMetadata,
+            youtubeMetadata
+        },
         data() {
             return {
                 song_id: '',
-                song: null
+                song: {}
             }
         },
         async mounted() {
@@ -26,5 +51,10 @@
 </script>
 
 <style lang="scss" scoped>
+    .songs {
+        padding: 5px;
+    }
+
+// MEDIA QUERIES
 
 </style>

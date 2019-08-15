@@ -12,7 +12,9 @@
                                 <v-col sm="12" md="4" v-for="song in songs" :key="song._id">
                                     <v-card>
                                         <v-img height="200px" :src="song.coverArt"></v-img>
-                                        <v-card-title class="align-end fill-height">{{song.title}} - {{ song.artist }}</v-card-title>
+                                        <v-card-title class="align-end fill-height">
+                                            {{song.title}} - {{ song.artist.name }} 
+                                        </v-card-title>
                                         <v-card-text><strong>Genre: </strong> {{ song.genre }}</v-card-text>
                                         <v-card-text class="v-card__text2"><strong>Album: </strong> {{ song.album }}</v-card-text>
                                         <v-card-actions>

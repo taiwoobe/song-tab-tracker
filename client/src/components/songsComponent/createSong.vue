@@ -6,9 +6,12 @@
                     <v-flex>
                         <shared-panel title="Song Metadata">
                             <v-card-text>
-                                <v-text-field label="Title" v-validate="'required'" name="title" v-model="song.title"></v-text-field>
-                                <v-text-field label="Artist" v-validate="'required'" name="artist" v-model="song.artist"></v-text-field>
+                                <v-text-field label="Song Title" v-validate="'required'" name="title" v-model="song.title"></v-text-field>
+                                <v-text-field label="Artist Name" v-validate="'required'" name="artist" v-model="song.name"></v-text-field>
+                                <v-text-field label="Country" v-validate="'required'" name="country" v-model="song.country"></v-text-field>
+                                <v-text-field type="number" label="Song Rating" v-validate="'required'" name="song-rating" v-model="song.rating" min="0" max="10"></v-text-field>
                                 <v-text-field label="Genre" v-validate="'required'" name="genre" v-model="song.genre"></v-text-field>
+                                <v-text-field label="Album" v-validate="'required'" name="album" v-model="song.album"></v-text-field>
                                 <v-text-field label="Cover Art URL" v-validate="'required'" name="coverArt" v-model="song.coverArt"></v-text-field>
                                 <v-text-field label="YouTube ID" v-validate="'required'" name="youtubeId" v-model="song.youtubeId"></v-text-field>
                             </v-card-text>
@@ -47,7 +50,9 @@ import songService from '../../services/songsService'
             return {
                 song: {
                     title: '',
-                    artist: '',
+                    name: '',
+                    country: '',
+                    rating: '',
                     genre: '',
                     album: '',
                     coverArt: '',

@@ -31,10 +31,14 @@ module.exports = {
     },
     async createSong(req, res) {
         try {
-            const { title, artist, genre, album, coverArt, youtubeId, lyrics, tab } = req.body;
+            const { title, name, country, rating, genre, album, coverArt, youtubeId, lyrics, tab } = req.body;
             const song = await Song.create({
                 title: title,
-                artist: artist,
+                artist: {
+                    name: name,
+                    countryOfOrigin: country,
+                    rating: rating
+                },
                 genre: genre,
                 album: album,
                 coverArt: coverArt,
