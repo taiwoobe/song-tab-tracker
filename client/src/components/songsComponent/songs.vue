@@ -5,14 +5,13 @@
                 <v-layout align-center justify-center>
                     <v-flex xs12 sm12 md10>
                         <shared-panel title="Songs">
-                            <v-btn slot="action" light medium absolute right middle fab to="songs/create">
+                            <v-btn slot="action" light medium absolute right middle fab @click="addSong()">
                                 <v-icon>add</v-icon>
                             </v-btn>
                             <v-row class="songs">
                                 <v-col sm="12" md="4" v-for="song in songs" :key="song._id">
                                     <v-card>
-                                        <v-img height="200px" :src="song.coverArt">
-                                        </v-img>
+                                        <v-img height="200px" :src="song.coverArt"></v-img>
                                         <v-card-title class="align-end fill-height">{{song.title}} - {{ song.artist }}</v-card-title>
                                         <v-card-text><strong>Genre: </strong> {{ song.genre }}</v-card-text>
                                         <v-card-text class="v-card__text2"><strong>Album: </strong> {{ song.album }}</v-card-text>
@@ -59,6 +58,9 @@ import songServices from '../../services/songsService'
             this.songs = response.data.data;
         },
         methods: {
+            addSong() {
+                this.$router.push({name: 'createSong'});
+            },
             viewSong(song) {
                 this.$router.push({name: 'viewSong', params: {id: song._id}});
             }

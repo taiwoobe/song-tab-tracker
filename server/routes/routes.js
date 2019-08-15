@@ -8,6 +8,7 @@ router.post('/register', AuthenticationControllerPolicy.register, Authentication
 router.post('/login', AuthenticationController.login);
 router.post('/songs', songsController.createSong);
 router.get('/songs', songsController.getSongs);
+router.get('/songs/:id', songsController.getSong);
 
 
 // Export API routes

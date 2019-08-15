@@ -1,21 +1,26 @@
 <template>
     <div>
-        <h2>the product id is {{ song_id }}</h2>
-        <!-- <div class="col-md-12" v-for="(song_id,index) in songs" :key="index">
-        <div v-if="song_id == product.productId">
-        <h1>{{song.title}}</h1>
+        <div v-if="song">
+            <h2>The song id is {{ song_id }}</h2>
+            Song title: {{ song.title }}
         </div>
-        </div> -->
     </div>
 </template>
 
 <script>
-    name: 'viewSong'
-    export default {
+    // name: 'viewSong'
+    import songServices from '../../services/songsService'
+    export default {    
         data() {
             return {
-                song_id: this.$route.params.id,
+                song_id: '',
+                song: null
             }
+        },
+        async mounted() {
+            this.song_id = this.$route.params.id;
+            const response = await songServices.showSong(this.song_id);
+            this.song = response.data.data;
         },
     }
 </script>

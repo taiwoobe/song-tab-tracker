@@ -6,12 +6,26 @@ module.exports = {
             const song = await Song.find({});
             res.json({
                 status: "success",
-                message: 'Songs retrieved sucessfully.',
+                message: 'All Songs retrieved sucessfully.',
                 data: song
             });
         } catch(err) {
             res.status(500).send({
                 error: 'Something went wrong trying to get the songs. Try again.'
+            })
+        }
+    },
+    async getSong(req, res)  {
+        try {
+            const song = await Song.findById(req.params.id);
+            res.json({
+                status: 'success',
+                message: 'Song retrieved successfully.',
+                data: song
+            })
+        } catch (err) {
+            req.status(500).send({
+                error: 'Cannot retrive song. Try again.'
             })
         }
     },
