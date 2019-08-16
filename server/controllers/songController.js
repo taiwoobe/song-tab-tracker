@@ -3,7 +3,18 @@ Song = require('../models/songModel');
 module.exports = {
     async getSongs (req, res) {
         try {
-            const song = await Song.find({});
+            let song = null;
+            const search = req.query.search;
+            if (search) {
+                let regexSearch = '.*' + search + '.*';
+                song = await Song.find({
+                    $or: [
+                        { title: { $regex: regexSearch, $options: 'i'} }, { artist: { $regex: regexSearch, $options: 'i'} }, { genre: { $regex: regexSearch, $options: 'i'} }, { album: { $regex: regexSearch, $options: 'i'} }
+                    ]
+                });
+            } else {
+                song = await Song.find({});
+            }
             res.json({
                 status: "success",
                 message: 'All Songs retrieved sucessfully.',

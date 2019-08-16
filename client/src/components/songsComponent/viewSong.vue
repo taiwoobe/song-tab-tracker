@@ -24,14 +24,12 @@
 
 <script>
     name: 'viewSong'
-    import sharedPanel from '../shared/sharedPanel'
     import songMetadata from '../songsComponent/songMetadata'
     import lyricsMetadata from '../songsComponent/lyricsMetadata'
     import youtubeMetadata from '../songsComponent/youtubeMetadata'
     import songService from '../../services/songsService'
     export default {   
         components: {
-            sharedPanel,
             songMetadata,
             lyricsMetadata,
             youtubeMetadata

@@ -25,12 +25,8 @@
 
 <script>
 import AuthenticationService from '../services/authenticationService'
-import sharedPanel from './shared/sharedPanel';
     export default {
         name: 'register',
-        components: {
-          sharedPanel
-        },
         data() {
             return {
                 email: '',

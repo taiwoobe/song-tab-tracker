@@ -19,11 +19,7 @@
 </template>
 
 <script>
-import sharedPanel from '../shared/sharedPanel'
     export default {
-        components: {
-            sharedPanel
-        },
         props: [
             'song'
         ],

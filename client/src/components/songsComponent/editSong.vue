@@ -38,13 +38,9 @@
 </template>
 
 <script>
-import sharedPanel from '../shared/sharedPanel'
 import songService from '../../services/songsService'
     export default {
         name: 'editSong',
-        components: {
-            sharedPanel
-        },
         data() {
             return {
                 song: {

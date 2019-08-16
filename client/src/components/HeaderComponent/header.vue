@@ -1,7 +1,7 @@
 <template>
     <v-toolbar color="primary" dark flat>
         <v-toolbar-title>
-            <router-link to="/">Song Tab Tracker APP</router-link>
+            <router-link to="/">Songlite</router-link>
         </v-toolbar-title>
         <v-toolbar-items>
             <v-btn class="primary" dark text @click="navigateTo({name: 'songs'})"> Browse </v-btn>

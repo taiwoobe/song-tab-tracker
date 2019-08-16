@@ -1,8 +1,10 @@
 import { HTTP } from "../config/api.js";
 
 export default {
-    getAllSongs() {
-        return HTTP.get('songs');
+    getAllSongs(search) {
+        return HTTP.get('songs', { params: {
+            search: search
+        }});
     },
     createNewSong(song) {
         return HTTP.post('songs', song);

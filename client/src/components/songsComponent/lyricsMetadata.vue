@@ -7,14 +7,10 @@
 </template>
 
 <script>
-import sharedPanel from '../shared/sharedPanel'
     export default {
         props: [
             'lyrics'
-        ],
-        components: {
-            sharedPanel
-        }
+        ]
     }
 </script>
 

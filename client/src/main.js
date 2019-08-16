@@ -5,12 +5,15 @@ import vuetify from '@/plugins/vuetify'
 import { store } from './store/store'
 import VeeValidate from 'vee-validate';
 import VueYouTubeEmbed from 'vue-youtube-embed'
+import Panel from './components/shared/sharedPanel'
 
 Vue.use(VueYouTubeEmbed)
 Vue.use(VueYouTubeEmbed, { global: true })
 Vue.use(VeeValidate, {
   events: ''
 });
+
+Vue.component('sharedPanel', Panel);
 
 Vue.config.productionTip = false
 
