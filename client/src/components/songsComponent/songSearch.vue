@@ -1,13 +1,9 @@
 <template>
     <v-text-field label="Search Song" v-validate="'required'" name="search" v-model="searchSong"></v-text-field>
-    <!-- <shared-panel title="Search Songs" class="search-panel">
-        <v-card>
-            <v-text-field label="Search Song" v-validate="'required'" name="search" v-model="search"></v-text-field>
-        </v-card>
-    </shared-panel> -->
 </template>
 
 <script>
+import _ from 'lodash';
     export default {
         data() {
             return {
@@ -15,7 +11,7 @@
             }
         },
         watch: {
-            searchSong(value) {
+            searchSong: _.debounce(async function (value) {
                 const route = {
                     name: 'songs'
                 }
@@ -25,7 +21,7 @@
                     }
                 }
                 this.$router.push(route);
-            },
+            }, 700),
             '$route.query.search': {
                 immediate: true,
                 handler(value) {
