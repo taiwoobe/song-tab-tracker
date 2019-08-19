@@ -17,9 +17,6 @@
                             <v-icon>favorite</v-icon>
                         </v-btn>
                         <v-btn icon>
-                            <v-icon>share</v-icon>
-                        </v-btn>
-                        <v-btn icon>
                             <v-icon>bookmark</v-icon>
                         </v-btn>
                         <v-spacer></v-spacer>
@@ -35,11 +32,17 @@
 
 <script>
 import songServices from '../../services/songsService'
+import {mapState} from 'vuex'
     export default {
         data() {
             return {
                 songs: null
             }
+        },
+        computed: {
+           ...mapState([
+               'isUserLoggedIn'
+           ]) 
         },
         watch: {
             '$route.query.search': {

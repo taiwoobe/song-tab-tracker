@@ -19,10 +19,16 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
     export default {
         props: [
             'song'
         ],
+        computed: {
+           ...mapState([
+               'isUserLoggedIn'
+           ]) 
+        },
         methods: {
             editSong() {
                 this.$router.push({name: 'editSong'});
