@@ -50,7 +50,7 @@ import AuthenticationService from '../services/authenticationService'
           }).then(result => {
             this.$store.dispatch('setToken', result.data.token);
             this.$store.dispatch('setUser', result.data.user);
-            this.$router.push({name: 'song'});
+            this.$router.push({name: 'songs'});
           }).catch (error => {
             this.error = 'The email you entered already exists.'
           })

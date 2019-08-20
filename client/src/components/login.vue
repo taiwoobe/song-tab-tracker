@@ -52,6 +52,7 @@ export default {
           }).then(result => {
             this.$store.dispatch('setToken', result.data.token);
             this.$store.dispatch('setUser', result.data.user);
+            this.$router.push({name: 'songs'});
           })
         } else {
           this.error = 'Please fill in all fields correctly.'
