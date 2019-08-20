@@ -16,9 +16,6 @@
                         <v-btn icon>
                             <v-icon>favorite</v-icon>
                         </v-btn>
-                        <v-btn icon>
-                            <v-icon>bookmark</v-icon>
-                        </v-btn>
                         <v-spacer></v-spacer>
                         <v-btn icon @click="viewSong(song)">
                             <v-icon> keyboard_arrow_right </v-icon>
