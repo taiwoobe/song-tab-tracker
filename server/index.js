@@ -11,6 +11,8 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(morgan('combined'));
 
+require('./authentication/passport');
+
 // Connect to Mongoose and set connection variable
 mongoose.connect(dbConfig.url, { useNewUrlParser: true, useCreateIndex: true}).then(() => {
     console.log("Successfully connected to the database"); 
