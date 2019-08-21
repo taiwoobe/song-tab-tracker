@@ -4,7 +4,7 @@
             <v-icon>add</v-icon>
         </v-btn>
         <v-row class="songs">
-            <v-col sm="12" md="4" v-for="song in songs" :key="song._id">
+            <v-col sm="12" md="6" v-for="song in songs" :key="song._id">
                 <v-card>
                     <v-img height="200px" :src="song.coverArt"></v-img>
                     <v-card-title class="align-end fill-height">
