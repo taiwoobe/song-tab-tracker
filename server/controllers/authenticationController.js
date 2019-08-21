@@ -41,14 +41,16 @@ module.exports = {
                 return res.status(403).send({
                     error: 'The Login information was incorrect.'
                 })
+            } else {
+                const updatedUser = {_id: user._id, email: user.email};
+                res.json({
+                    status: "success",
+                    message: 'User login sucessfully.',
+                    auth: true,
+                    user: updatedUser,
+                    token: jwtSignUser(user.toJSON())
+                });
             }
-            res.json({
-                status: "success",
-                message: 'User login sucessfully.',
-                auth: true,
-                user: user,
-                token: jwtSignUser(user.toJSON())
-            });
         } catch(err) {
             res.status(500).send({
                 error: 'Something went wrong trying to log you in. Try again.'
