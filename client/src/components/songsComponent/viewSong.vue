@@ -23,12 +23,14 @@
 </template>
 
 <script>
-    name: 'viewSong'
     import songMetadata from '../songsComponent/songMetadata'
     import lyricsMetadata from '../songsComponent/lyricsMetadata'
     import youtubeMetadata from '../songsComponent/youtubeMetadata'
     import songService from '../../services/songsService'
+    import recentlyViewedServices from '../../services/recentlyViewedServices'
+    import {mapState} from 'vuex'
     export default {   
+        name: 'viewSong',
         components: {
             songMetadata,
             lyricsMetadata,
@@ -40,10 +42,23 @@
                 song: {}
             }
         },
+        computed: {
+           ...mapState([
+               'isUserLoggedIn',
+               'user'
+           ])
+        },
         async mounted() {
             this.song_id = this.$route.params.id;
             const response = await songService.showSong(this.song_id);
             this.song = response.data.data;
+
+            if (this.isUserLoggedIn) {
+                recentlyViewedServices.addNewHistory({
+                    songId: this.song_id,
+                    userId: this.user._id
+                })
+            }
         },
     }
 </script>

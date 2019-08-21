@@ -34,7 +34,8 @@ import {mapState} from 'vuex'
         }, 
         computed: {
            ...mapState([
-               'isUserLoggedIn'
+               'isUserLoggedIn',
+               'user'
            ])
         },  
         async mounted() {
